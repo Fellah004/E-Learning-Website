@@ -1,0 +1,16 @@
+{
+  "name": "elearning-platform",
+  "version": "1.0.0",
+  "description": "A modern e-learning platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node fella/index/server.js",
+    "populate-db": "node fella/index/populate-db.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3"
+  }
+}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Resources - NextGen Learning</title>
+    <link rel="icon" href="Images/eLearning_logo.png" type="image/png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .resources-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .resources-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .resources-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resources-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .resource-icon i {
+            font-size: 24px;
+            color: #2563eb;
+        }
+
+        .resource-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .resource-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: #1e40af;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.3s ease;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-item:hover {
+            background: #f9fafb;
+        }
+
+        .resource-item i {
+            color: #2563eb;
+            font-size: 1.2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: #f3f4f6;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+        }
+
+        .tab.active:hover {
+            background: #1e40af;
+        }
+
+        .resource-section {
+            display: none;
+        }
+
+        .resource-section.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="Images/eLearning_logo.png" alt="Website logo" />
+        <div class="navigation">
+            <ul>
+                <i id="menu-close" class="fa-sharp fa-regular fa-circle-xmark"></i>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">About us</a></li>
+                <li><a href="index.html#course">Courses</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="resources-container">
+        <div class="resources-header">
+            <h1>Learning Resources</h1>
+            <p>Access comprehensive learning materials to support your educational journey</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showResources('web-dev')">Web Development</div>
+            <div class="tab" onclick="showResources('app-dev')">App Development</div>
+            <div class="tab" onclick="showResources('data-science')">Data Science</div>
+        </div>
+
+        <!-- Web Development Resources -->
+        <div id="web-dev-resources" class="resource-section active">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="resource-title">Course Materials</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="https://www.w3.org/TR/html52/" target="_blank">HTML5 Specification Guide</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS Complete Guide</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="https://javascript.info/" target="_blank">Modern JavaScript Tutorial</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="resource-title">Video Tutorials</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=qz0aGYrrlhU" target="_blank">HTML Crash Course</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=1PnVor36_40" target="_blank">CSS Fundamentals</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=W6NZfCO5SIk" target="_blank">JavaScript Basics</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="resource-title">Code Examples</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/topics/html-examples" target="_blank">HTML Examples Repository</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-codepen"></i>
+                            <a href="https://codepen.io/trending" target="_blank">CSS Examples on CodePen</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-js"></i>
+                            <a href="https://www.javascripttutorial.net/javascript-examples/" target="_blank">JavaScript Examples</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="resource-title">Practice Exercises</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp Exercises</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-code"></i>
+                            <a href="https://www.w3schools.com/exercises/" target="_blank">W3Schools Practice</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy Game</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Development Resources -->
+        <div id="app-dev-resources" class="resource-section">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="resource-title">Flutter Documentation</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fas fa-book"></i>
+                            <a href="https://docs.flutter.dev/" target="_blank">Official Flutter Docs</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="https://dart.dev/guides" target="_blank">Dart Programming Guide</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-book"></i>
+                            <a href="https://flutter.dev/docs/cookbook" target="_blank">Flutter Cookbook</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="resource-title">Video Tutorials</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=pTJJsmejUOQ" target="_blank">Flutter Crash Course</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=Ej_Pcr4uC2Q" target="_blank">Dart Programming</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=1ukSR1GRtMU" target="_blank">App Development Tutorial</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="resource-title">Sample Projects</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/flutter/samples" target="_blank">Official Flutter Samples</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/Solido/awesome-flutter" target="_blank">Awesome Flutter Examples</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-code"></i>
+                            <a href="https://flutter.dev/docs/cookbook" target="_blank">Flutter Code Recipes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Science Resources -->
+        <div id="data-science-resources" class="resource-section">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="resource-title">Python & Data Science</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fas fa-book"></i>
+                            <a href="https://docs.python.org/3/" target="_blank">Python Documentation</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="https://pandas.pydata.org/docs/" target="_blank">Pandas Documentation</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-chart-line"></i>
+                            <a href="https://scikit-learn.org/stable/" target="_blank">Scikit-learn Docs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="resource-title">Video Tutorials</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=_uQrJ0TkZlc" target="_blank">Python for Beginners</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=LHBE6Q9XlzI" target="_blank">Data Science Basics</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fab fa-youtube"></i>
+                            <a href="https://www.youtube.com/watch?v=ua-CiDNNj30" target="_blank">Machine Learning Tutorial</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="resource-title">Practice & Datasets</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <i class="fas fa-database"></i>
+                            <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-code"></i>
+                            <a href="https://colab.research.google.com/" target="_blank">Google Colab Notebooks</a>
+                        </li>
+                        <li class="resource-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <a href="https://www.datacamp.com/projects" target="_blank">DataCamp Projects</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showResources(courseId) {
+            // Hide all resource sections
+            document.querySelectorAll('.resource-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected resource section
+            document.getElementById(`${courseId}-resources`).classList.add('active');
+
+            // Update tab styling
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html> 

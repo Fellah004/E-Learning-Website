@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - NextGen Learning</title>
+    <link rel="icon" href="Images/eLearning_logo.png" type="image/png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .course-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .course-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .course-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-progress {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 10px;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            background: #2563eb;
+            height: 100%;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .course-content {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .module {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-header {
+            padding: 1rem;
+            background: #f3f4f6;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-content {
+            padding: 1rem;
+            display: none;
+        }
+
+        .module-content.active {
+            display: block;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .lesson:last-child {
+            border-bottom: none;
+        }
+
+        .lesson:hover {
+            background: #f3f4f6;
+        }
+
+        .lesson-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e5e7eb;
+        }
+
+        .lesson.completed .lesson-icon {
+            background: #2563eb;
+            color: white;
+        }
+
+        .resources-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-icon {
+            color: #2563eb;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .quiz-container {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-question {
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e5e7eb;
+        }
+
+        .quiz-option.selected {
+            background: #2563eb;
+            color: white;
+        }
+
+        .enrollment-container {
+            max-width: 500px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .enrollment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .enroll-btn {
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .enroll-btn:hover {
+            background: #1e40af;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 1rem;
+            background: #34d399;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .go-to-course-btn {
+            display: none;
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .course-content {
+            display: none; /* Hide course content by default */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="Images/eLearning_logo.png" alt="Website logo" />
+        <div class="navigation">
+            <ul>
+                <i id="menu-close" class="fa-sharp fa-regular fa-circle-xmark"></i>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">About us</a></li>
+                <li><a href="index.html#course">Courses</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="course-container">
+        <div class="course-header">
+            <h1 class="course-title" id="courseTitle">Loading...</h1>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="courseDuration">Loading...</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <span id="courseInstructor">Loading...</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-users"></i>
+                    <span id="totalStudents">Loading...</span> students
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrollment Form -->
+        <div class="enrollment-container" id="enrollmentContainer">
+            <h2>Enroll in this Free Course</h2>
+            <div class="success-message" id="successMessage"></div>
+            <form class="enrollment-form" id="enrollmentForm">
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Email</label>
+                    <input type="email" id="studentEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentPhone">Phone Number</label>
+                    <input type="tel" id="studentPhone" required>
+                </div>
+                <button type="submit" class="enroll-btn">Enroll Free</button>
+            </form>
+            <a href="#" class="go-to-course-btn" id="goToCourseBtn">GO TO THE COURSE</a>
+        </div>
+
+        <!-- Course Content (Initially Hidden) -->
+        <div id="courseContent" style="display: none;">
+            <div class="course-progress">
+                <h3>Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <p><span id="completedLessons">0</span> of <span id="totalLessons">0</span> lessons completed</p>
+            </div>
+
+            <div class="course-content">
+                <div id="courseModules">
+                    <!-- Modules will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <h3>Resources</h3>
+                <ul class="resources-list">
+                    <li class="resource-item">
+                        <i class="fas fa-file-pdf resource-icon"></i>
+                        <a href="course-resources.html" target="_blank">Course Syllabus</a>
+                    </li>
+                    <li class="resource-item">
+                        <i class="fas fa-book resource-icon"></i>
+                        <a href="course-resources.html" target="_blank">Study Guide</a>
+                    </li>
+                    <li class="resource-item">
+                        <i class="fas fa-code resource-icon"></i>
+                        <a href="course-resources.html" target="_blank">Code Examples</a>
+                    </li>
+                    <li class="resource-item">
+                        <i class="fas fa-tasks resource-icon"></i>
+                        <a href="course-resources.html" target="_blank">Practice Exercises</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Course content data
+        const courseData = {
+            'web-dev': {
+                title: 'Web Development for Beginners',
+                duration: '12 weeks',
+                instructor: 'John Smith',
+                totalStudents: 1500,
+                modules: [
+                    {
+                        title: 'Module 1: HTML Fundamentals',
+                        lessons: [
+                            {
+                                title: 'Introduction to HTML',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/qz0aGYrrlhU',
+                                completed: false
+                            },
+                            {
+                                title: 'HTML Elements and Tags',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/UB1O30fR-EE',
+                                completed: false
+                            },
+                            {
+                                title: 'HTML Forms and Input',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/fNcJuPIZ2WE',
+                                completed: false
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Module 2: CSS Styling',
+                        lessons: [
+                            {
+                                title: 'CSS Basics',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/1PnVor36_40',
+                                completed: false
+                            },
+                            {
+                                title: 'CSS Layout and Flexbox',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/JJSoEo8JSnc',
+                                completed: false
+                            },
+                            {
+                                title: 'Responsive Design',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/srvUrASNj0s',
+                                completed: false
+                            }
+                        ]
+                    }
+                ]
+            },
+            'app-dev': {
+                title: 'App Development with Flutter',
+                duration: '10 weeks',
+                instructor: 'Sarah Johnson',
+                totalStudents: 1200,
+                modules: [
+                    {
+                        title: 'Module 1: Flutter Basics',
+                        lessons: [
+                            {
+                                title: 'Introduction to Flutter',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/pTJJsmejUOQ',
+                                completed: false
+                            },
+                            {
+                                title: 'Dart Programming Language',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/Ej_Pcr4uC2Q',
+                                completed: false
+                            }
+                        ]
+                    }
+                ]
+            },
+            'data-science': {
+                title: 'Data Science for Beginners',
+                duration: '14 weeks',
+                instructor: 'Michael Chen',
+                totalStudents: 900,
+                modules: [
+                    {
+                        title: 'Module 1: Python Basics',
+                        lessons: [
+                            {
+                                title: 'Introduction to Python',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/_uQrJ0TkZlc',
+                                completed: false
+                            },
+                            {
+                                title: 'Data Types and Variables',
+                                type: 'video',
+                                content: 'https://www.youtube.com/embed/khKv-8q7YmY',
+                                completed: false
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Get course ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('id');
+        const course = courseData[courseId];
+
+        if (course) {
+            // Update course header
+            document.getElementById('courseTitle').textContent = course.title;
+            document.getElementById('courseDuration').textContent = course.duration;
+            document.getElementById('courseInstructor').textContent = course.instructor;
+            document.getElementById('totalStudents').textContent = course.totalStudents;
+
+            // Calculate total lessons
+            const totalLessons = course.modules.reduce((total, module) => total + module.lessons.length, 0);
+            document.getElementById('totalLessons').textContent = totalLessons;
+
+            // Generate modules HTML
+            const modulesContainer = document.getElementById('courseModules');
+            course.modules.forEach((module, moduleIndex) => {
+                const moduleElement = document.createElement('div');
+                moduleElement.className = 'module';
+                moduleElement.innerHTML = `
+                    <div class="module-header" onclick="toggleModule(${moduleIndex})">
+                        <h3>${module.title}</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content" id="module-${moduleIndex}">
+                        ${module.lessons.map((lesson, lessonIndex) => `
+                            <div class="lesson" onclick="showLesson(${moduleIndex}, ${lessonIndex})">
+                                <div class="lesson-icon">
+                                    <i class="fas ${lesson.completed ? 'fa-check' : 'fa-play'}"></i>
+                                </div>
+                                <span>${lesson.title}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                modulesContainer.appendChild(moduleElement);
+            });
+        }
+
+        function toggleModule(moduleIndex) {
+            const moduleContent = document.getElementById(`module-${moduleIndex}`);
+            moduleContent.classList.toggle('active');
+        }
+
+        function showLesson(moduleIndex, lessonIndex) {
+            const lesson = courseData[courseId].modules[moduleIndex].lessons[lessonIndex];
+            const mainContent = document.querySelector('.main-content');
+            
+            // Create lesson content
+            const lessonContent = document.createElement('div');
+            lessonContent.innerHTML = `
+                <h2>${lesson.title}</h2>
+                <div class="video-container">
+                    <iframe src="${lesson.content}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            `;
+
+            // Replace existing content
+            while (mainContent.firstChild) {
+                mainContent.firstChild.remove();
+            }
+            mainContent.appendChild(lessonContent);
+
+            // Mark lesson as completed
+            lesson.completed = true;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completedLessons = course.modules.reduce((total, module) => 
+                total + module.lessons.filter(lesson => lesson.completed).length, 0);
+            const totalLessons = course.modules.reduce((total, module) => 
+                total + module.lessons.length, 0);
+            
+            document.getElementById('completedLessons').textContent = completedLessons;
+            const progressPercentage = (completedLessons / totalLessons) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+        }
+
+        // Show first module by default
+        if (course && course.modules.length > 0) {
+            document.getElementById('module-0').classList.add('active');
+        }
+
+        // Check if user is already enrolled
+        async function checkEnrollment() {
+            const email = localStorage.getItem('studentEmail');
+            const courseId = urlParams.get('id');
+            
+            if (email && courseId) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/check-enrollment?email=${email}&courseId=${courseId}`);
+                    const data = await response.json();
+                    
+                    if (data.enrolled) {
+                        showCourseContent();
+                    }
+                } catch (error) {
+                    console.error('Error checking enrollment:', error);
+                }
+            }
+        }
+
+        // Handle enrollment form submission
+        document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const enrollmentData = {
+                courseId: urlParams.get('id'),
+                studentName: document.getElementById('studentName').value,
+                email: document.getElementById('studentEmail').value,
+                phone: document.getElementById('studentPhone').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enroll', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(enrollmentData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Store email for future reference
+                    localStorage.setItem('studentEmail', enrollmentData.email);
+                    
+                    // Show success message
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.textContent = data.message;
+                    successMessage.style.display = 'block';
+
+                    // Hide form and show Go To Course button
+                    document.getElementById('enrollmentForm').style.display = 'none';
+                    document.getElementById('goToCourseBtn').style.display = 'block';
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                alert(error.message || 'Enrollment failed. Please try again.');
+            }
+        });
+
+        // Handle "Go To Course" button click
+        document.getElementById('goToCourseBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showCourseContent();
+        });
+
+        function showCourseContent() {
+            // Hide enrollment container
+            document.getElementById('enrollmentContainer').style.display = 'none';
+            // Show course content
+            document.getElementById('courseContent').style.display = 'block';
+        }
+
+        // Check enrollment status when page loads
+        checkEnrollment();
+    </script>
+</body>
+</html> 
